@@ -16,8 +16,13 @@ color:white;
 font-family: fantasy;
 font-size: larger;
 text-align: center;
-
 }
+
+p{text-align: center;
+  font-family: "Times New Roman", sans-serif;
+  font-weight: normal;
+  color: white;
+ }
 
 li{display:inline;
 padding-inline:20px;}
