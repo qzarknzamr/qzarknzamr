@@ -1,26 +1,151 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Ramalan Rasi Bintang</title>
+    <style>
+        body {
+            background: #f9fafb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            padding: 32px 40px;
+            text-align: center;
+            min-width: 340px;
+        }
+        h1 {
+            color: #111827;
+            margin-bottom: 16px;
+        }
+        select, button {
+            font-size: 1rem;
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+        button {
+            background: #111827;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #374151;
+        }
+        .fortune {
+            margin-top: 24px;
+            font-size: 1.2rem;
+            color: #4b5563;
+            font-style: italic;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ramalan Rasi Bintang</h1>
+        <label for="zodiac">Pilih Rasi Bintang Anda:</label><br>
+        <select id="zodiac">
+            <option>Aries</option>
+            <option>Taurus</option>
+            <option>Gemini</option>
+            <option>Cancer</option>
+            <option>Leo</option>
+            <option>Virgo</option>
+            <option>Libra</option>
+            <option>Scorpio</option>
+            <option>Sagittarius</option>
+            <option>Capricorn</option>
+            <option>Aquarius</option>
+            <option>Pisces</option>
+        </select>
+        <br>
+        <button onclick="showFortune()">Ramalkan</button>
+        <div class="fortune" id="fortune"></div>
+    </div>
+    <script>
+        const ZODIAC_SIGNS = {
+            "Aries": [
+                "Semangatmu hari ini membara seperti meteor yang melesat!",
+                "Kesempatan baru akan datang, manfaatkan dengan penuh keberanian.",
+                "Hari ini adalah hari yang tepat untuk memulai petualangan baru."
+            ],
+            "Taurus": [
+                "Ketenangan dan keteguhanmu seperti planet Venus yang stabil.",
+                "Kesabaranmu akan membawa hasil memuaskan dalam waktu dekat.",
+                "Hari ini, jangan takut untuk menikmati keindahan sederhana."
+            ],
+            "Gemini": [
+                "Pikiranmu cemerlang seperti bintang kembar bersinar terang.",
+                "Kemampuan komunikasimu akan membuka pintu peluang baru.",
+                "Hari ini adalah waktu yang tepat untuk belajar hal baru."
+            ],
+            "Cancer": [
+                "Perasaanmu lapang dan penuh kasih, seperti bulan yang tenang.",
+                "Lindungi orang yang kamu sayangi dengan kelembutan hati.",
+                "Hari ini, berikan waktu untuk merawat diri dan keluarga."
+            ],
+            "Leo": [
+                "Kharismamu bersinar seperti matahari di pusat tata surya.",
+                "Kepemimpinanmu akan menginspirasi banyak orang hari ini.",
+                "Beranilah mengambil keputusan penting dengan percaya diri."
+            ],
+            "Virgo": [
+                "Perhatianmu pada detail membuatmu bersinar seperti bintang terdekat.",
+                "Organisasi adalah kunci kesuksesanmu hari ini.",
+                "Jangan lupa memberi penghargaan pada usahamu yang teliti."
+            ],
+            "Libra": [
+                "Keseimbangan dalam hidupmu seperti orbit planet yang stabil.",
+                "Harmoni dengan orang lain akan membawa kedamaian.",
+                "Hari ini waktu yang baik untuk berkolaborasi dan berdamai."
+            ],
+            "Scorpio": [
+                "Semangatmu seperti energi bintang api yang misterius dan kuat.",
+                "Intuisimu akan membimbingmu dalam keputusan sulit.",
+                "Jangan ragu mengikuti naluri dan keberanianmu hari ini."
+            ],
+            "Sagittarius": [
+                "Petualangan baru menantimu seperti komet yang melintas cepat.",
+                "Optimismemu akan menarik pengalaman positif.",
+                "Hari ini, jelajahi peluang yang belum pernah kamu coba sebelumnya."
+            ],
+            "Capricorn": [
+                "Keteguhan hatimu seperti gunung es di luar angkasa yang megah.",
+                "Kerja keras dan disiplin akan membuahkan hasil manis.",
+                "Tetap fokus pada tujuan dan jangan terpengaruh distraksi."
+            ],
+            "Aquarius": [
+                "Pikiran inovatifmu berkilauan seperti galaksi jauh.",
+                "Ide-ide kreatif akan datang tanpa diduga.",
+                "Hari ini adalah waktu yang tepat untuk berbagi visi dan impian."
+            ],
+            "Pisces": [
+                "Kelembutan hatimu seperti kabut bintang yang misterius.",
+                "Ikuti intuisi dan biarkan imajinasi membimbingmu.",
+                "Hari ini berikan waktu untuk bermimpi dan beristirahat."
+            ]
+        };
 
-<html>
-    <head>
-        <meta charset="utf-8">
-
-        <title>Blank template</title>
-
-        <!-- Load external CSS styles -->
-        <link rel="stylesheet" href="style.css">
-
-    </head>
-
-    <body>
-        <ul>
-            <li><a href="index.html">beranda </a> </li>
-            <li><a href="process.html">proses desain</a></li>
-            <li> produk </li>
-            </ul>
-
- <!-- Load external JavaScript -->
-        <script src="scripts.js"></script>
-        
-    </body>
-
-</html> 
+        function showFortune() {
+            const zodiac = document.getElementById('zodiac').value;
+            const fortuneList = ZODIAC_SIGNS[zodiac];
+            if (fortuneList) {
+                const fortune = fortuneList[Math.floor(Math.random() * fortuneList.length)];
+                document.getElementById('fortune').textContent = fortune;
+            } else {
+                document.getElementById('fortune').textContent = "Silakan pilih rasi bintang yang valid.";
+            }
+        }
+    </script>
+</body>
+</html>
