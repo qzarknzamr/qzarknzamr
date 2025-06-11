@@ -1,5 +1,5 @@
 /* Place your CSS styles in this file */
-body{background-color: black; 
+body{background-color: white; 
 border:5px solid black;
 border-radius:15px;}
 
@@ -11,7 +11,7 @@ h1 {
 }
 
 ul{list-style-type:none;
-background-color:black;
+background-color: grey;
 color:white;
 font-family: fantasy;
 font-size: larger;
